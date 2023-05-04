@@ -1,0 +1,41 @@
+{% extends 'pg/base.html' %}
+
+{% block content %}
+
+<h2>{{p.name}}</h2> <p class="link-read-post"><a href="{% url 'add_layer' %}">Добавить параметр</a></p>
+<ul class="list-articles">
+	{% for p in layer %}
+			<li>
+
+				<h2>{{p.name}}</h2>
+				<p class="link-read-post"><a href="{% url 'add_node' %}">Добавить значение</a></p>
+	{% autoescape on %}
+	{{p.content|linebreaks|truncatechars:200}}
+	{% endautoescape %}
+				<p class="link-read-post"><a href="{{ p.get_absolute_url }}">Отобразить слой</a></p>
+			<div class="clear"></div>
+
+			</li>
+	{% endfor %}
+</ul>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Имя графа</th>
+			<th>Дата создания</th>
+			<th>Дата обновления</th>
+			<th>Дата обновления</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for pg in pg %}
+    <tr>
+        <td>{{ pg.title }}</td>
+        <td>{{ pg.time_create }}</td>
+        <td>{{ pg.time_update }}</td>
+		<td></td>
+    </tr>
+{% endfor %}
+	</tbody>
+	</table>
+{% endblock %}
