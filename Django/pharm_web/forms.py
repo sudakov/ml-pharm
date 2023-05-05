@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from .models import *
 
-
+"""
 class AddPgForm(forms.Form):
     title = forms.CharField(max_length=255, label="Название параметрического графа", widget=forms.TextInput(attrs={'class': 'form-input'}))
 
@@ -26,6 +26,8 @@ class AddNodeForm(forms.Form):
     parametr = forms.CharField(max_length=255, label="Вес вершины", widget=forms.TextInput(attrs={'class': 'form-input'}))
     layer = forms.ModelChoiceField(queryset=Layer.objects.all(), label="Категории", empty_label="Параметр не выбран")
 
+"""
+
 
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
@@ -41,4 +43,3 @@ class RegisterUserForm(UserCreationForm):
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-
