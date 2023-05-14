@@ -8,16 +8,83 @@ from django.views.generic.list import ListView
 from .forms import *
 from .models import *
 
+menu = [{'title': "Главная", 'url_name': 'home'},
+        {'title': "Добавить данные в БД", 'url_name': 'add_page'},
+        ]
+
+add_menu = [{'name_model': "Добавить группу ЛС", 'pk': "1", 'url_name': 'add_DrugGroup'},
+            {'name_model': "Добавить ЛС", 'pk': "1", 'url_name': 'add_page'},
+            ]
+
 
 def index(request):
     ml = ml_model.objects.all()
-    print(ml)
     context = {
         'ml_model': ml,
-        'menu': 'menu',
+        'menu': menu,
         'title': 'Главная страница',
-        'pg_selected': 0,
+        'ml_model_selected': 0,
+        'main_element': 'Главная страница',
     }
+    return render(request, 'pharm/index.html', context=context)
+
+
+def addpage(request):
+    context = {
+        'add_element': add_menu,
+        'menu': menu,
+        'title': 'Добавить данные в БД',
+        'add_element_selected': 0,
+    }
+    return render(request, 'pharm/addElementDB.html', context=context)
+
+
+def aboutpage(request):
+    context = {
+
+    }
+    return render(request, 'pharm/index.html', context=context)
+
+
+def addDrugGroup(request):
+    if request.method == 'POST':
+        form = AddDrugGroupForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            try:
+                DrugGroup.objects.create(**form.cleaned_data)
+                return redirect('home')
+            except:
+                form.add_error(None, 'Ошибка добавления поста')
+
+    else:
+        form = AddDrugGroupForm()
+
+    context = {
+        'add_element': add_menu,
+        'menu': menu,
+        'form': form,
+        'title': 'Добавить данные в БД',
+        'add_element_selected': 0,
+    }
+    return render(request, 'pharm/addDrugGroup.html', context=context)
+
+
+def show_model(request, ml_model_slug):
+    ml = ml_model.objects.all()
+    context = {
+        'ml_model': ml,
+        'menu': menu,
+        'title': 'Главная страница',
+        'main_element': 'show_model + ' + ml_model_slug,
+    }
+    if ml_model_slug == 'vyvod-tablichki':
+        context = {
+            'ml_model': ml,
+            'menu': menu,
+            'title': 'Главная страница',
+            'main_element': 'if show_model + ' + ml_model_slug,
+        }
     return render(request, 'pharm/index.html', context=context)
 
 
@@ -45,20 +112,7 @@ def about(request):
 
 
 def addpage(request):
-    if request.method == 'POST':
-        form = AddPgForm(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-            try:
-                ParametricGraph.objects.create(**form.cleaned_data)
-                return redirect('home')
-            except:
-                form.add_error(None, 'Ошибка добавления поста')
-
-    else:
-        form = AddPgForm()
-    return render(request, 'pg/addpg.html', {'form': form, 'menu': menu, 'title': 'Добавление параметрического графа'})
-
+    
 
 def add_layer(request):
     if request.method == 'POST':
@@ -149,7 +203,7 @@ def show_layer(request, layer_id):
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
-    template_name = 'pg/register.html'
+    template_name = 'pharm/register.html'
     success_url = reverse_lazy('login')
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -159,7 +213,7 @@ class RegisterUser(CreateView):
 
 class LoginUser(LoginView):
     form_class = LoginUserForm
-    template_name = 'pg/login.html'
+    template_name = 'pharm/login.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -3,15 +3,14 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from .models import *
 
-"""
-class AddPgForm(forms.Form):
-    title = forms.CharField(max_length=255, label="Название параметрического графа", widget=forms.TextInput(attrs={'class': 'form-input'}))
+
+class AddDrugGroupForm(forms.ModelForm):
 
     class Meta:
-        model = ParametricGraph
-        fields = ('title')
+        model = DrugGroup
+        fields = '__all__'
 
-
+"""
 class AddLayerForm(forms.Form):
     name = forms.CharField(max_length=255, label="Название слоя", widget=forms.TextInput(attrs={'class': 'form-input'}))
     pg = forms.ModelChoiceField(queryset=ParametricGraph.objects.all(), label="Графы", empty_label="Граф не выбран")

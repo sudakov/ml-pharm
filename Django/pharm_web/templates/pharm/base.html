@@ -14,7 +14,10 @@
 {% block mainmenu %}
 		<div class="header">
 			<ul id="mainmenu" class="mainmenu">
-				<li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
+			<li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
+{% for m in menu %}
+			<li><a href="{% url m.url_name %}">{{m.title}}</a></li>
+{% endfor %}
 				<li class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></li>
 			</ul>
 			<div class="clear"></div>
@@ -27,17 +30,18 @@
 <!-- Sidebar слева -->
 	<td valign="top" class="left-chapters">
 	<ul id="leftchapters">
-{% if pg_selected == 0 %}
-		<li class="selected">Все модели</li>
-{% else %}
-		<li class="nonselected"><a href="{% url 'home' %}">Все модели</a></li>
-{% endif %}
-
-{% for c in ml_model %}
-	{% if c.pk == ml_model_selected %}
+{% for c in add_element %}
+	{% if c.nom == add_element_selected %}
 		<li class="selected">{{c.name_model}}</li>
 	{% else %}
-		<li class="nonselected" ><a href="{% url 'home' %}">{{c.name_model}}</a></li>
+		<li class="nonselected" ><a href="{% url c.url_name %}">{{c.name_model}}</a></li>
+	{% endif %}
+{% endfor %}
+{% for ml in ml_model %}
+	{% if ml.pk == ml_model_selected %}
+		<li class="selected">{{ml.name_model}}</li>
+	{% else %}
+		<li class="nonselected" ><a href="{{ ml.get_absolute_url }}">{{ml.name_model}}</a></li>
 	{% endif %}
 {% endfor %}
 	</ul>
