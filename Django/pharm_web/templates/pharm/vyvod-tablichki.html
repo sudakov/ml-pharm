@@ -1,0 +1,22 @@
+{% extends 'pharm/base.html' %}
+
+{% block content %}
+<table class="table">
+	<thead>
+		<tr>
+			<th>Имя графа</th>
+			<th>Дата создания</th>
+			<th>Дата обновления</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for dg in DrugGroup %}
+    <tr>
+        <td>{{ dg.title }}</td>
+        <td>{{ dg.time_create }}</td>
+        <td>{{ dg.time_update }}</td>
+    </tr>
+{% endfor %}
+	</tbody>
+	</table>
+{% endblock %}

@@ -7,17 +7,18 @@ from django.views.generic.list import ListView
 
 from .forms import *
 from .models import *
+from .viewsAdd import *
 
 menu = [{'title': "Главная", 'url_name': 'home'},
         {'title': "Добавить данные в БД", 'url_name': 'add_page'},
         ]
 
 add_menu = [{'name_model': "Добавить группу ЛС", 'pk': "1", 'url_name': 'add_DrugGroup'},
-            {'name_model': "Добавить ЛС", 'pk': "1", 'url_name': 'add_page'},
+            {'name_model': "Добавить ЛС", 'pk': "1", 'url_name': 'add_Drug'},
             ]
 
 
-def index(request):
+def index_views(request):
     ml = ml_model.objects.all()
     context = {
         'ml_model': ml,
@@ -29,7 +30,7 @@ def index(request):
     return render(request, 'pharm/index.html', context=context)
 
 
-def addpage(request):
+def addpage_views(request):
     context = {
         'add_element': add_menu,
         'menu': menu,
@@ -39,27 +40,15 @@ def addpage(request):
     return render(request, 'pharm/addElementDB.html', context=context)
 
 
-def aboutpage(request):
+def aboutpage_views(request):
     context = {
 
     }
     return render(request, 'pharm/index.html', context=context)
 
 
-def addDrugGroup(request):
-    if request.method == 'POST':
-        form = AddDrugGroupForm(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-            try:
-                DrugGroup.objects.create(**form.cleaned_data)
-                return redirect('home')
-            except:
-                form.add_error(None, 'Ошибка добавления поста')
-
-    else:
-        form = AddDrugGroupForm()
-
+def addDrugGroup_views(request):
+    form = addDrugGroup(request)
     context = {
         'add_element': add_menu,
         'menu': menu,
@@ -70,22 +59,38 @@ def addDrugGroup(request):
     return render(request, 'pharm/addDrugGroup.html', context=context)
 
 
-def show_model(request, ml_model_slug):
-    ml = ml_model.objects.all()
+def addDrug_views(request):
+    form = addDrug(request)
     context = {
-        'ml_model': ml,
+        'add_element': add_menu,
         'menu': menu,
-        'title': 'Главная страница',
-        'main_element': 'show_model + ' + ml_model_slug,
+        'form': form,
+        'title': 'Добавить данные в БД',
+        'add_element_selected': 0,
     }
-    if ml_model_slug == 'vyvod-tablichki':
+    return render(request, 'pharm/addDrugGroup.html', context=context)
+
+
+def show_model_views(request, ml_model_slug):
+    ml = ml_model.objects.all()
+    if ml_model_slug == 'test_model':
         context = {
             'ml_model': ml,
             'menu': menu,
             'title': 'Главная страница',
+            'main_element': 'show_model + ' + ml_model_slug,
+        }
+        return render(request, 'pharm/index.html', context=context)
+    elif ml_model_slug == 'vyvod-tablichki':
+        dg = DrugGroup.objects.all()
+        context = {
+            'ml_model': ml,
+            'DrugGroup': dg,
+            'menu': menu,
+            'title': 'Главная страница',
             'main_element': 'if show_model + ' + ml_model_slug,
         }
-    return render(request, 'pharm/index.html', context=context)
+        return render(request, 'pharm/vyvod-tablichki.html', context=context)
 
 
 """

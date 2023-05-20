@@ -10,6 +10,12 @@ class AddDrugGroupForm(forms.ModelForm):
         model = DrugGroup
         fields = '__all__'
 
+class AddDrugForm(forms.ModelForm):
+
+    class Meta:
+        model = Drug
+        fields = '__all__'
+
 """
 class AddLayerForm(forms.Form):
     name = forms.CharField(max_length=255, label="Название слоя", widget=forms.TextInput(attrs={'class': 'form-input'}))
