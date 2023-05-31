@@ -414,3 +414,14 @@ ul.lang-list li a:hover {color: #fdc073;}
 .table tbody tr:nth-child(even){
 	background: #F7F7F7;
 }
+.interaction-table {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+.interaction-table th, .interaction-table td {
+    border: 1px solid black;
+    padding: 5px;
+}
+.interaction-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

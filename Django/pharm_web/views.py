@@ -4,7 +4,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic.list import ListView
+from django.db.models import Q
 
+from .all_drug_table_views import all_drug_table
 from .forms import *
 from .models import *
 from .viewsAdd import *
@@ -82,14 +84,13 @@ def show_model_views(request, ml_model_slug):
         }
         return render(request, 'pharm/index.html', context=context)
     elif ml_model_slug == 'vyvod-tablichki':
-        dg = DrugGroup.objects.all()
         context = {
             'ml_model': ml,
-            'DrugGroup': dg,
             'menu': menu,
             'title': 'Главная страница',
             'main_element': 'if show_model + ' + ml_model_slug,
         }
+        context.update(all_drug_table(request))
         return render(request, 'pharm/vyvod-tablichki.html', context=context)
 
 
@@ -98,8 +99,25 @@ class PGView(ListView):
     model = ml_model
     template_name = 'pg/index.html'
     context_object_name = 'GraphList'
+    
+    
+        selected_drug_obj = Drug.objects.get(name=selected_drug)
+        if selected_drug2 != None:
+            string_table = 'Другие взаимодействия с лекарственным средством'
+        else:
+            string_table = 'Взаимодействие с лекарственным средством'
+        dit = DrugInteractionTable.objects.filter(Q(DrugOne=selected_drug_obj.id) | Q(DrugTwo=selected_drug_obj.id))
+    
+                'DrugInteraction': dit2,
 
 
+            selected_drug2_obj = Drug.objects.get(name=selected_drug2)
+
+            dit2 = DrugInteractionTable.objects.filter(
+                (Q(DrugOne=selected_drug_obj.id) & Q(DrugTwo=selected_drug2_obj.id)) |
+                (Q(DrugOne=selected_drug2_obj.id) & Q(DrugTwo=selected_drug_obj.id))
+            )
+            
 def index(request):
     pg = ml_model.objects.all()
     context = {
