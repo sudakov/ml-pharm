@@ -7,7 +7,7 @@ The selected resources for data collection are:
 | --- | --- | --- |
 | Рубрикатор клинических рекомендаций | [https://cr.minzdrav.gov.ru/clin_recomend](https://cr.minzdrav.gov.ru/clin_recomend)  | minzdrav |
 | Drugs.com | [https://www.drugs.com/drug_information.html](https://www.drugs.com/drug_information.html) | drugs |
-| Medscape | [https://reference.medscape.com/drugs](https://reference.medscape.com/drugs) |  |
+| Medscape | [https://reference.medscape.com/drugs](https://reference.medscape.com/drugs) | medscape |
 | Государственный реестр лекарственных средств | [https://grls.rosminzdrav.ru](https://grls.rosminzdrav.ru) |  |
 | PubMed | [https://pubmed.ncbi.nlm.nih.gov](https://pubmed.ncbi.nlm.nih.gov) |  |
 | Research Portfolio Online Reporting Tools (RePORT) | [https://reporter.nih.gov/](https://reporter.nih.gov/) |  |
