@@ -16,23 +16,6 @@ class AddDrugForm(forms.ModelForm):
         model = Drug
         fields = '__all__'
 
-"""
-class AddLayerForm(forms.Form):
-    name = forms.CharField(max_length=255, label="Название слоя", widget=forms.TextInput(attrs={'class': 'form-input'}))
-    pg = forms.ModelChoiceField(queryset=ParametricGraph.objects.all(), label="Графы", empty_label="Граф не выбран")
-
-    class Meta:
-        model = Layer
-        fields = ('title')
-
-
-class AddNodeForm(forms.Form):
-    name_node = forms.CharField(max_length=255, label="Значение", widget=forms.TextInput(attrs={'class': 'form-input'}))
-    parametr = forms.CharField(max_length=255, label="Вес вершины", widget=forms.TextInput(attrs={'class': 'form-input'}))
-    layer = forms.ModelChoiceField(queryset=Layer.objects.all(), label="Категории", empty_label="Параметр не выбран")
-
-"""
-
 
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))

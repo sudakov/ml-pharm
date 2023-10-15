@@ -1,4 +1,5 @@
 html, body {
+    display: flex;
 	font-family: 'Arial';
 	margin: 0;
 	padding: 0;
@@ -116,7 +117,6 @@ ul.mainmenu li a:hover {
 
 ul.langitem {
 	list-style: none;
-	display: inline-block;
 	margin: 30px;
 	padding: 0;
 	max-width: 300px
@@ -187,7 +187,6 @@ div.button {
 .left-chapters ul li.share {margin: 60px 0 0 0;}
 .left-chapters ul li.share p {margin: 30px 0 30px 0;}
 .left-chapters ul li.share a {
-	display: inline-block;
 	width: 40px;
 	height: 40px;
 	margin: 0 20px 0 0;
@@ -217,7 +216,6 @@ ul.breadcrumbs {
 	font-family: Sans-serif, Arial, Tahoma;
 }
 ul.breadcrumbs li {
-	display: inline-block;
 }
 ul.breadcrumbs li a {
 	color: #0059b2;
@@ -282,7 +280,6 @@ ul.lang-list {
 	font-family: Sans-serif, Arial, Tahoma;
 }
 ul.lang-list li {
-	display: inline-block;
 	margin-left: 40px;
 }
 ul.lang-list li.selected {color: #fdc073; border-bottom: 1px solid #fdc073;}
@@ -298,7 +295,6 @@ ul.lang-list li a:hover {color: #fdc073;}
 }
 
 .topic-subject .topic-text {
-	display: inline-block;
 	font-size: 28px;
 	color: #777;
 	padding: 0 10px 0 10px;
@@ -321,7 +317,6 @@ ul.lang-list li a:hover {color: #fdc073;}
 	column-gap: 40px;
 }
 .list-topic ol li {
-	display: list-item;
 	margin: 10px 10px 0 0px;
 	padding: 0 0 0 10px;
 }
@@ -375,7 +370,6 @@ ul.lang-list li a:hover {color: #fdc073;}
 }
 
 .form-label {
-    display: inline-block;
     min-width: 150px;
     vertical-align: top;
 }
@@ -424,4 +418,98 @@ ul.lang-list li a:hover {color: #fdc073;}
 }
 .interaction-table tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+.container {
+}
+
+.medicines {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  border: 4px solid #000000;
+  background-color: #96c7ef;
+  width: 100%;
+  padding: 20px;
+}
+
+.medicines h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_medicines{
+  display: flex;
+  width: 100%;
+  margin: 10px;
+  box-sizing: border-box;
+  font-size: 24px;
+}
+
+.button_next{
+  margin: 0 auto;
+  display: block;
+  background-color: #30c651;
+  height: 34px;
+  width: 142px;
+  border-radius: 90px;
+  border: 4px solid #000000;
+  font-size: 24px;
+}
+
+.medicines_ul {
+    margin: 1rem;
+    border: 4px solid #000000;
+    list-style: none;
+    background-color:#6CC15E;
+    font-size: 20px;
+    overflow: hidden;
+    width: 100%;
+    padding: 20px;
+}
+
+.medicines_li {
+    margin: 1rem;
+    border: 1px solid #D9D9D9;
+    list-style: none;
+    background-color:#d9d9d9;
+    font-size: 20px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.interaction_description_attentively {
+    background-color:#F4F84A;
+    font-size: 20px;
+}
+
+.interaction_description_insignificant {
+    background-color:#6DC9CF;
+    font-size: 20px;
+}
+
+.interaction_description_contraindicated {
+    background-color:#FF0000;
+    font-size: 20px;
+}
+
+.interaction_description_serious {
+    background-color:#FA5858;
+    font-size: 20px;
+}
+
+.interaction_with {
+    border: 1px solid #000000;
+    padding: 0px;
+}
+
+.interaction_with_h2 {
+    margin: 0px;
+}
+
+.interaction_description {
+    border: 1px solid #000000;
+    padding: 0px;
 }

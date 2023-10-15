@@ -7,10 +7,13 @@ services:
     build: .
     # Задание имени контейнера для сервиса django
     container_name: django
+    hostname: pharm_web
     # Задание команды, которую нужно запустить при запуске контейнера для сервиса django
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/usr/src/app
+      - D:\Programs\ml-palm\Django\testmedscape_en:/testmedscape_en
+      - D:\Programs\ml-palm\Django\testmedscape_ru:/testmedscape_ru
     # Открытие порта на хостовой машине и перенаправление на порт в контейнере
     ports:
       - 8000:8000

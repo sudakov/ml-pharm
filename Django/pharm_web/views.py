@@ -7,6 +7,9 @@ from django.views.generic.list import ListView
 from django.db.models import Q
 
 from .all_drug_table_views import all_drug_table
+from .iteraction_medscape import *
+from .medscape_out_date import *
+from .LoadJSON import load_json_Medscape
 from .forms import *
 from .models import *
 from .viewsAdd import *
@@ -93,137 +96,39 @@ def show_model_views(request, ml_model_slug):
         context.update(all_drug_table(request))
         return render(request, 'pharm/vyvod-tablichki.html', context=context)
 
+    elif ml_model_slug == 'zagruzka-dannyh-iz-medscape':
+        s=load_json_Medscape()
 
-"""
-class PGView(ListView):
-    model = ml_model
-    template_name = 'pg/index.html'
-    context_object_name = 'GraphList'
-    
-    
-        selected_drug_obj = Drug.objects.get(name=selected_drug)
-        if selected_drug2 != None:
-            string_table = 'Другие взаимодействия с лекарственным средством'
-        else:
-            string_table = 'Взаимодействие с лекарственным средством'
-        dit = DrugInteractionTable.objects.filter(Q(DrugOne=selected_drug_obj.id) | Q(DrugTwo=selected_drug_obj.id))
-    
-                'DrugInteraction': dit2,
+        context = {
+            'ml_model': ml,
+            'menu': menu,
+            'title': 'Главная страница',
+            'main_element': 'show_model + ' + ml_model_slug+' '+s,
+        }
+        return render(request, 'pharm/index.html', context=context)
+    elif ml_model_slug == 'iteraction_MedScape':
 
+        context = {
+            'ml_model': ml,
+            'menu': menu,
+            'title': 'Главная страница',
+            'main_element': 'show_model + ' + ml_model_slug,
+        }
+        context.update(iteraction_medscape_out(request))
+        context.update(iteraction_medscape_two_drugs(request))
+        return render(request, 'pharm/iterction_medscape.html', context=context)
 
-            selected_drug2_obj = Drug.objects.get(name=selected_drug2)
-
-            dit2 = DrugInteractionTable.objects.filter(
-                (Q(DrugOne=selected_drug_obj.id) & Q(DrugTwo=selected_drug2_obj.id)) |
-                (Q(DrugOne=selected_drug2_obj.id) & Q(DrugTwo=selected_drug_obj.id))
-            )
-            
-def index(request):
-    pg = ml_model.objects.all()
-    context = {
-        'pg': pg,
-        'menu': menu,
-        'title': 'Главная страница',
-        'pg_selected': 0,
-    }
-    PGView.as_view()
-    return render(request, 'pg/index.html', context=context)
+    elif ml_model_slug == 'vyvesti-dannye-medscape':
 
 
-def about(request):
-    return render(request, 'pg/about.html', {'menu': menu, 'title': 'О сайте'})
-
-
-def addpage(request):
-    
-
-def add_layer(request):
-    if request.method == 'POST':
-        form = AddLayerForm(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-            try:
-                Layer.objects.create(**form.cleaned_data)
-                return redirect('home')
-            except:
-                form.add_error(None, 'Ошибка добавления поста')
-
-    else:
-        form = AddLayerForm()
-    return render(request, 'pg/addlayer.html', {'form': form, 'menu': menu, 'title': 'Добавление параметра'})
-
-
-def add_node(request):
-    if request.method == 'POST':
-        form = AddNodeForm(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-            try:
-                Node.objects.create(**form.cleaned_data)
-                return redirect('home')
-            except:
-                form.add_error(None, 'Ошибка добавления поста')
-
-    else:
-        form = AddNodeForm()
-    return render(request, 'pg/addnode.html', {'form': form, 'menu': menu, 'title': 'Добавление значения'})
-
-
-def contact(request):
-    return HttpResponse("Обратная связь")
-
-
-def login(request):
-    return HttpResponse("Авторизация")
-
-
-def pageNotFound(request, exception):
-    return HttpResponseNotFound('<h1>Страница не найдена</h1>')
-
-
-def show_pg(request, pg_id):
-    pg = ParametricGraph.objects.all()
-    layer = Layer.objects.filter(pg_id=pg_id)
-    node = Node.objects.all()
-    #    if len(layer) == 0:
-    #       raise Http404()
-    print(layer)
-
-    context = {
-        'pg': pg,
-        'layer': layer,
-        'node': node,
-        'menu': menu,
-        'title': 'Параметрический граф',
-        'pg_selected': pg_id,
-    }
-
-    return render(request, 'pg/index.html', context=context)
-
-
-def show_layer(request, layer_id):
-    pg = ParametricGraph.objects.all()
-    layer = Layer.objects.all()
-    print(layer_id)
-    node = Node.objects.filter(layer_id=layer_id)
-    #    if len(layer) == 0:
-    #       raise Http404()
-    print(node)
-
-    context = {
-        'pg': pg,
-        'layer': layer,
-        'node': node,
-        'menu': menu,
-        'title': 'Параметрический граф',
-        'pg_selected': 0,
-    }
-
-    return render(request, 'pg/indexlayer.html', context=context)
-
-"""
-
-
+        context = {
+            'ml_model': ml,
+            'menu': menu,
+            'title': 'Главная страница',
+            'main_element': 'show_model + ' + ml_model_slug,
+        }
+        context.update(medscape_out_date(request))
+        return render(request, 'pharm/vivod_medscape.html', context=context)
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'pharm/register.html'
