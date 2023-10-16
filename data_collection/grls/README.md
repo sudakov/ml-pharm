@@ -8,3 +8,4 @@ This directory has the following structure:
 | `main.py` | program code in Python 3.8 for collecting data for each page  |
 | `requirements.txt` | file listing all the dependencies |
 | `data/grls.rar` | collected data of the information resource, the archive of the result of the code `main.py` |
+| | + [more data](https://drive.google.com/file/d/19wSz9lrYb3Nsmwbhd9p3banivmPws-5W/view?usp=sharing) |
