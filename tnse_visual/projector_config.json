@@ -1,0 +1,13 @@
+{
+  "embeddings": [
+    {
+      "tensorName": "My tensor",
+      "tensorShape": [
+        3188,
+        100
+      ],
+      "tensorPath": "https://raw.githubusercontent.com/sudakov/ml-pharm/main/tnse_visual/logs/mytensor/data.tsv",
+      "metadataPath": "https://raw.githubusercontent.com/sudakov/ml-pharm/main/tnse_visual/logs/mytensor/metadata.tsv"
+    }
+  ]
+}
